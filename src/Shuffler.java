@@ -28,6 +28,7 @@ public class Shuffler {
 			System.out.println();
 		}
 		System.out.println();
+		
 
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive efficient selection shuffles:");
@@ -41,6 +42,11 @@ public class Shuffler {
 			System.out.println();
 		}
 		System.out.println();
+		System.out.println("Results of flip(): " + flip());
+		System.out.println();
+		int[] arr1 = {1,2,3};
+		int[] arr2 = {3,1,2};
+		System.out.println("This should be true: " + arePermutations(arr1, arr2));
 	}
 
 
@@ -83,5 +89,24 @@ public class Shuffler {
 			values[k] = values[r];
 			values[r] = x;
 		}
+	}
+	
+	public static String flip() {
+		int r = (int) Math.floor(Math.random() * 3); 
+		return (r == 0 || r == 1) ? "heads" : "tails";
+	}
+	
+	public static boolean arePermutations(int[] arr1, int[] arr2) {
+		int[] vals = new int[arr1.length];
+		boolean arePermutations = true;
+		for(int i = 0; i < arr1.length; i ++) { vals[i] = arr1[i]; }
+		for(int i = 0; i < vals.length; i++) {
+			boolean indexMatch = false;
+			for(int j = 0; j < vals.length; j++) {
+				if(vals[j] == arr2[i]) indexMatch = true;
+			}
+			arePermutations = (indexMatch == false) ? false : arePermutations;
+		}
+		return arePermutations;
 	}
 }
