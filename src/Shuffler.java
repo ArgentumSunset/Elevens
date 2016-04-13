@@ -46,7 +46,21 @@ public class Shuffler {
 		System.out.println();
 		int[] arr1 = {1,2,3};
 		int[] arr2 = {3,1,2};
+		int[] arr3 = {1,4,3};
+		int[] arr4 = {1,2,3,4,5};
+		int[] arr5 = {5,3,4,1,2};
+		int[] arr6 = {6,3,4,1,2,18,44,2,2,3};
+		int[] arr7 = {2,44,6,2,3,3,1,18,2,4};
+		int[] arr8 = {1,1};
+		int[] arr9 = {2,44,6,2,3,4,1,18,2,4};
 		System.out.println("This should be true: " + arePermutations(arr1, arr2));
+		System.out.println("This should be false: " + arePermutations(arr1, arr3));
+		System.out.println("This should be true: " + arePermutations(arr4, arr5));
+		System.out.println("This should be true: " + arePermutations(arr5, arr4));
+		System.out.println("This should be true: " + arePermutations(arr6, arr7));
+		System.out.println("This should be false: " + arePermutations(arr4, arr6));
+		System.out.println("This should be false: " + arePermutations(arr6, arr9));
+		System.out.println("This should be false: " + arePermutations(arr1, arr8));
 	}
 
 
@@ -97,16 +111,28 @@ public class Shuffler {
 	}
 	
 	public static boolean arePermutations(int[] arr1, int[] arr2) {
-		int[] vals = new int[arr1.length];
-		boolean arePermutations = true;
-		for(int i = 0; i < arr1.length; i ++) { vals[i] = arr1[i]; }
-		for(int i = 0; i < vals.length; i++) {
-			boolean indexMatch = false;
-			for(int j = 0; j < vals.length; j++) {
-				if(vals[j] == arr2[i]) indexMatch = true;
+		if(arr1.length == arr2.length) {
+			arr1 = selectionSort(arr1);
+			arr2 = selectionSort(arr2);
+			for(int i = 0; i < arr1.length; i++) {
+				if(arr1[i] != arr2[i]) return false;
 			}
-			arePermutations = (indexMatch == false) ? false : arePermutations;
 		}
-		return arePermutations;
+		return true;
+	}
+	
+	public static int[] selectionSort(int[] arr) {
+		for(int i = 0; i < arr.length; i++) {
+			int iMin = i;
+			for(int j = i + 1; j < arr.length; j++) {
+				if(arr[j] <= arr[iMin]) {
+					iMin = j;
+				}
+			}
+			int x = arr[iMin];
+			arr[iMin] = arr[i];
+			arr[i] = x;
+		}
+		return arr;
 	}
 }
