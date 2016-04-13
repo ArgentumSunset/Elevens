@@ -8,11 +8,11 @@ public class DeckTester {
 	 *	@param args is not used.
 	 */
 	public static void main(String[] args) {
-		String[] ranks = {"jack", "queen", "king"};
-		String[] suits = {"blue", "red"};
-		int[] pointValues = {11, 12, 13};
-		Deck d = new Deck(ranks, suits, pointValues);
-
+		String[] fullRanks = {"2", "3", "4", "5", "6", "7","8", "9", "10", "jack", "queen", "king", "ace"};
+		String[] fullSuits = {"hearts", "diamonds", "spades", "clubs"};
+		int[] fullValues = {2,3,4,5,6,7,8,9,10,11,12,13,14};
+		Deck d = new Deck(fullRanks, fullSuits, fullValues);
+		
 		System.out.println("**** Original Deck Methods ****");
 		System.out.println("  toString:\n" + d.toString());
 		System.out.println("  isEmpty: " + d.isEmpty());
@@ -50,12 +50,5 @@ public class DeckTester {
 		System.out.println("  deal: " + d.deal());
 		System.out.println();
 		System.out.println();
-
-		String[] fullRanks = {"2", "3", "4", "5", "6", "7","8", "9", "10", "jack", "queen", "king", "ace"};
-		String[] fullSuits = {"hearts", "diamonds", "spades", "clubs"};
-		int[] fullValues = {2,3,4,5,6,7,8,9,10,11,12,13,14};
-		Deck deck52 = new Deck(fullRanks, fullSuits, fullValues);
-		deck52.shuffle();
-		System.out.println(deck52.toString());
 	}
 }
