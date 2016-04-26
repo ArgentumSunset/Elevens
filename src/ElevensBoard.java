@@ -5,6 +5,8 @@ import java.util.ArrayList;
  * The ElevensBoard class represents the board in a game of Elevens.
  */
 public class ElevensBoard extends Board {
+	
+	public Card[] cards = super.cards;
 
 	/**
 	 * The size (number of cards) on the board.
@@ -65,11 +67,8 @@ public class ElevensBoard extends Board {
 	 *         false otherwise.
 	 */
 	@Override
-	public boolean anotherPlayIsPossible(List<Integer> selectedCards) {
-		boolean jqk = containsJQK(selectedCards);
-		boolean elevenpair = containsPairSum11(selectedCards);
-		
-		
+	public boolean anotherPlayIsPossible() {
+		return (containsPairSum11(cardIndexes()) || containsJQK(cardIndexes()));
 	}
 
 	/**
@@ -81,7 +80,12 @@ public class ElevensBoard extends Board {
 	 *              contain an 11-pair; false otherwise.
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		for(int i = 0; i < selectedCards.size(); i++) {
+			for(int j = 0; j < selectedCards.size(); j++) {
+				if(selectedCards.get(i) + selectedCards.get(j) == 11) return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -93,6 +97,12 @@ public class ElevensBoard extends Board {
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		boolean j = false, q = false, k = false;
+		for(int i = 0; i < selectedCards.size() - 2; i++) {
+			if(selectedCards.get(i) == 13) k = true;
+			if(selectedCards.get(i) == 12) q = true;
+			if(selectedCards.get(i) == 11) j = true;
+		}
+		return (j && q && k);
 	}
 }
