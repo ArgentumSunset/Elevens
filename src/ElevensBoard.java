@@ -99,9 +99,9 @@ public class ElevensBoard extends Board {
 	private boolean containsJQK(List<Integer> selectedCards) {
 		boolean j = false, q = false, k = false;
 		for(int i = 0; i < selectedCards.size() - 2; i++) {
-			if(selectedCards.get(i) == 13) k = true;
-			if(selectedCards.get(i) == 12) q = true;
-			if(selectedCards.get(i) == 11) j = true;
+			if(selectedCards.get(i).equals("king")) k = true;
+			if(selectedCards.get(i).equals("queen")) q = true;
+			if(selectedCards.get(i).equals("jack")) j = true;
 		}
 		return (j && q && k);
 	}
